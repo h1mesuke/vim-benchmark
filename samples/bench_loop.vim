@@ -1,15 +1,15 @@
 " Vim script benchmark
 
-let bm = benchmark#new("for vs while")
+let s:bm = benchmark#new("for vs while")
 
 let s:lines = map(range(0, 9999), '"This is a line."')
 
-function! bm.for()
+function! s:bm.for()
   for line in s:lines
   endfor
 endfunction
 
-function! bm.while()
+function! s:bm.while()
   let idx = 0 | let n_lines = len(s:lines)
   while idx < n_lines
     let line = s:lines[idx]
@@ -17,6 +17,6 @@ function! bm.while()
   endwhile
 endfunction
 
-call bm.run(3)
+call s:bm.run(3)
 
 " vim: filetype=vim

@@ -1,11 +1,11 @@
 " Vim script benchmark
 
-let bm = benchmark#new("String is empty?")
+let s:bm = benchmark#new("String is empty?")
 
 let s:N = 10000
 let s:str = "hello"
 
-function! bm.empty()
+function! s:bm.empty()
   let i = 0
   while i < s:N
     if empty(s:str)
@@ -14,7 +14,7 @@ function! bm.empty()
   endwhile
 endfunction
 
-function! bm.op_equal()
+function! s:bm.op_equal()
   let i = 0
   while i < s:N
     if s:str == ""
@@ -23,7 +23,7 @@ function! bm.op_equal()
   endwhile
 endfunction
 
-function! bm.op_match()
+function! s:bm.op_match()
   let i = 0
   while i < s:N
     if s:str =~ '^\s*$'
@@ -32,6 +32,6 @@ function! bm.op_match()
   endwhile
 endfunction
 
-call bm.run(3)
+call s:bm.run(3)
 
 " vim: filetype=vim
