@@ -1,7 +1,7 @@
 *benchmark.txt*		Simple Benchmarking Tool for Vim script
 
 Author  : h1mesuke <himesuke@gmail.com>
-Updated : 2011-12-26
+Updated : 2011-12-29
 Version : 0.0.1
 License : MIT license {{{
 
@@ -54,7 +54,7 @@ HOW TO WRITE A BENCHMARK			*benchmark-how-to-write*
 <
 	2. Create a new Benchmark object at your "bench_something.vim".
 >
-		let bm = benchmark#new("Something")
+		let s:bm = benchmark#new("Something")
 <
 		* benchmark#new() returns a new Benchmark object.
 		* benchmark#new()'s first argument will be used as a caption
@@ -62,11 +62,11 @@ HOW TO WRITE A BENCHMARK			*benchmark-how-to-write*
 	
 	3. Define some functions to be benchmarked.
 >
-		function! bm.bench_1()
+		function! s:bm.bench_1()
 		  " Do something...
 		endfunction
 	
-		function! bm.bench_2()
+		function! s:bm.bench_2()
 		  " Do something...
 		endfunction
 <
@@ -75,7 +75,7 @@ HOW TO WRITE A BENCHMARK			*benchmark-how-to-write*
 
 	4. Call run().
 >
-		call bm.run()
+		call s:bm.run()
 <
 		* You need to call Benchmark's run() method AFTER the
 		  definitions of the functions to be benchmarked.
@@ -101,24 +101,25 @@ INTERFACE					*benchmark-interface*
 ------------------------------------------------------------------------------
 FUNCTIONS					*benchmark-fuctions*
 
-	benchmark#new( [caption])		*benchmark#new()*
+	benchmark#new( [{caption}])		*benchmark#new()*
 
-	Creates a new Benchmark object.
-	If [caption] is given, it will be used as a cation of the benchmark in
-	its report.
+		Creates a new Benchmark object.
+		When {caption} is given, it will be used as a cation of the
+		benchmark in its report.
 
-	Example: >
-	let bm = benchmark#new("Something")
+		Example: >
+		let s:bm = benchmark#new("Something")
 <
 BENCHMARK METHODS				*benchmark-methods*
 
-	run( [n_try])				*benchmark-run()*
+	run( [{n-try}])				*benchmark-run()*
 
-	Runs the benchmark and reports the results.
-	If [n_try] is given, the benchmark is executed [n_try] times.
+		Runs the benchmark and reports the results.
+		When {n-try} is given, the benchmark is executed {n-try}
+		times.
 
-	Example: >
-	call bm.run(3)
+		Example: >
+		call s:bm.run(3)
 <
 ==============================================================================
 ISSUES						*benchmark-issues*
