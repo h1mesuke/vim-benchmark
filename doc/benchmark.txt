@@ -1,7 +1,7 @@
 *benchmark.txt*		Simple Benchmarking Tool for Vim script
 
 Author  : h1mesuke <himesuke@gmail.com>
-Updated : 2012-01-08
+Updated : 2012-01-13
 Version : 0.0.1
 License : MIT license {{{
 
@@ -27,7 +27,6 @@ License : MIT license {{{
 ==============================================================================
 CONTENTS					*benchmark-contents*
 
-	Contents				|benchmark-contents|
 	Introduction				|benchmark-introduction|
 	How to Write a Benchmark		|benchmark-how-to-write|
 	Interface				|benchmark-interface|
