@@ -1,7 +1,7 @@
 *benchmark.txt*		Simple Benchmarking Tool for Vim script
 
 Author  : h1mesuke <himesuke@gmail.com>
-Updated : 2012-01-13
+Updated : 2012-01-15
 Version : 0.0.1
 License : MIT license {{{
 
@@ -14,7 +14,7 @@ License : MIT license {{{
 	the following conditions:
 	The above copyright notice and this permission notice shall be
 	included in all copies or substantial portions of the Software.
-	
+
 	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 	EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 	MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -58,13 +58,13 @@ HOW TO WRITE A BENCHMARK			*benchmark-how-to-write*
 		* benchmark#new() returns a new Benchmark object.
 		* benchmark#new()'s first argument will be used as a caption
 		  in the report of the benchmark.
-	
+
 	3. Define some functions to be benchmarked.
 >
 		function! s:bm.bench_1()
 		  " Do something...
 		endfunction
-	
+
 		function! s:bm.bench_2()
 		  " Do something...
 		endfunction
