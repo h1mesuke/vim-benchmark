@@ -28,6 +28,9 @@
 " }}}
 "=============================================================================
 
+let s:save_cpo = &cpo
+set cpo&vim
+
 let s:benchmarker = {}
 
 function! s:benchmarker.run(...) abort
@@ -81,3 +84,6 @@ function! benchmark#new(...)
   let bm.__caption__ = (a:0 ? a:1 : "")
   return bm
 endfunction
+
+let &cpo = s:save_cpo
+unlet s:save_cpo
