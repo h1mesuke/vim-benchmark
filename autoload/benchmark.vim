@@ -3,7 +3,7 @@
 "
 " File    : autoload/benchmark.vim
 " Author  : h1mesuke <himesuke@gmail.com>
-" Updated : 2011-12-26
+" Updated : 2012-01-15
 " Version : 0.0.1
 " License : MIT license {{{
 "
@@ -81,5 +81,3 @@ function! benchmark#new(...)
   let bm.__caption__ = (a:0 ? a:1 : "")
   return bm
 endfunction
-
-" vim: filetype=vim

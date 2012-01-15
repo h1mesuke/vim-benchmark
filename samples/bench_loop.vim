@@ -18,5 +18,3 @@ function! s:bm.while()
 endfunction
 
 call s:bm.run(3)
-
-" vim: filetype=vim

@@ -19,5 +19,3 @@ function! s:bm.op_plus()
 endfunction
 
 call s:bm.run(3)
-
-" vim: filetype=vim

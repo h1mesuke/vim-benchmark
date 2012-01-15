@@ -33,5 +33,3 @@ function! s:bm.op_match()
 endfunction
 
 call s:bm.run(3)
-
-" vim: filetype=vim
