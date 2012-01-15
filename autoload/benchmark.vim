@@ -62,7 +62,7 @@ function! s:benchmarker.run(...) abort
       echomsg printf("  %-*s : %f", col1_width, func, used)
     endfor
     for [func, errmsg] in items(errors)
-      echomsg printf("  %*s : Error (%s)", col1_width, func, errmsg)
+      echomsg printf("  %-*s : Error (%s)", col1_width, func, errmsg)
     endfor
     let i += 1
   endwhile
