@@ -3,7 +3,7 @@
 "
 " File    : autoload/benchmark.vim
 " Author  : h1mesuke <himesuke@gmail.com>
-" Updated : 2012-01-15
+" Updated : 2012-01-20
 " Version : 0.0.1
 " License : MIT license {{{
 "
@@ -51,15 +51,21 @@ function! s:benchmarker.run(...) abort
     let errors  = {}
     for func in bmfuncs
       try
+        let result = {}
         let start = reltime()
-        call call(self[func], [], self)
-        let results[func] = str2float(reltimestr(reltime(start)))
+        let retval = call(self[func], [], self)
+        let result.used = str2float(reltimestr(reltime(start)))
+        if s:is_sample(retval)
+          let result.sample = retval
+        endif
+        let results[func] = result
       catch
         let errors[func] = v:exception
       endtry
     endfor
-    for [func, used] in sort(items(results), 's:compare_2nd')
-      echomsg printf("  %-*s : %f", col1_width, func, used)
+    for [func, result] in sort(items(results), 's:compare_used')
+      echomsg printf("  %-*s : %9.6f%s", col1_width, func, result.used,
+            \ has_key(result, 'sample') ? "   => " . string(result.sample) : "")
     endfor
     for [func, errmsg] in items(errors)
       echomsg printf("  %-*s : Error (%s)", col1_width, func, errmsg)
@@ -75,8 +81,14 @@ function! s:get_bmfuncs(bm)
   return filter(keys(a:bm), is_valid_name . ' && ' . is_funcref)
 endfunction
 
-function s:compare_2nd(item1, item2)
-  return (a:item1[1] == a:item2[1] ? 0 : (a:item1[1] > a:item2[1] ? 1 : -1))
+function! s:is_sample(value)
+  return (type(a:value) != type(0) || a:value != 0)
+endfunction
+
+function s:compare_used(item1, item2)
+  let used1 = a:item1[1].used
+  let used2 = a:item2[1].used
+  return (used1 == used2 ? 0 : (used1 > used2 ? 1 : -1))
 endfunction
 
 function! benchmark#new(...)
