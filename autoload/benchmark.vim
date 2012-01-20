@@ -31,6 +31,7 @@
 let s:save_cpo = &cpo
 set cpo&vim
 
+let s:PRECISION = 6
 let s:benchmarker = {}
 
 function! s:benchmarker.run(...) abort
@@ -39,7 +40,6 @@ function! s:benchmarker.run(...) abort
   endif
   echomsg "Benchmark: " . self.__caption__
   let bmfuncs = s:get_bmfuncs(self)
-  let col1_width = max(map(copy(bmfuncs), 'len(v:val)'))
   let n_try = (a:0 ? a:1 : 1)
   let i = 1
   while i <= n_try
@@ -63,12 +63,17 @@ function! s:benchmarker.run(...) abort
         let errors[func] = v:exception
       endtry
     endfor
+    let col_func_width = max(map(copy(bmfuncs), 'len(v:val)'))
+    let col_used_width = max(map(values(results),
+          \ 'float2nr(floor(log10(v:val.used)))')) + 2 + s:PRECISION
     for [func, result] in sort(items(results), 's:compare_used')
-      echomsg printf("  %-*s : %9.6f%s", col1_width, func, result.used,
+      echomsg printf("  %-*s : %*.*f%s",
+            \ col_func_width, func,
+            \ col_used_width, s:PRECISION, result.used,
             \ has_key(result, 'sample') ? "   => " . string(result.sample) : "")
     endfor
     for [func, errmsg] in items(errors)
-      echomsg printf("  %-*s : Error (%s)", col1_width, func, errmsg)
+      echomsg printf("  %-*s : Error (%s)", col_func_width, func, errmsg)
     endfor
     let i += 1
   endwhile
