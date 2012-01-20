@@ -63,27 +63,33 @@ function! s:benchmarker.run(...) abort
         let errors[func] = v:exception
       endtry
     endfor
-    let col_func_width = max(map(copy(bmfuncs), 'len(v:val)'))
-    let col_used_width = max(map(values(results),
-          \ 'float2nr(floor(log10(v:val.used)))')) + 2 + s:PRECISION
-    for [func, result] in sort(items(results), 's:compare_used')
-      echomsg printf("  %-*s : %*.*f%s",
-            \ col_func_width, func,
-            \ col_used_width, s:PRECISION, result.used,
-            \ has_key(result, 'sample') ? "   => " . string(result.sample) : "")
-    endfor
-    for [func, errmsg] in items(errors)
-      echomsg printf("  %-*s : Error (%s)", col_func_width, func, errmsg)
-    endfor
+    call s:print_report(results, errors)
     let i += 1
   endwhile
 endfunction
 
+function! s:print_report(results, errors)
+  let bmfuncs = keys(a:results) + keys(a:errors)
+  let col_func_width = max(map(bmfuncs, 'len(v:val)'))
+  let bmuseds = map(values(a:results), 'v:val.used')
+  let col_used_width = max(map(bmuseds,
+        \ 'float2nr(floor(log10(v:val)))')) + 2 + s:PRECISION
+  for [func, result] in sort(items(a:results), 's:compare_used')
+    echomsg printf("  %-*s : %*.*f%s",
+          \ col_func_width, func,
+          \ col_used_width, s:PRECISION, result.used,
+          \ has_key(result, 'sample') ? "   => " . string(result.sample) : "")
+  endfor
+  for [func, errmsg] in items(a:errors)
+    echomsg printf("  %-*s : Error (%s)", col_func_width, func, errmsg)
+  endfor
+endfunction
+
 function! s:get_bmfuncs(bm)
   let type_func = type(function('tr'))
-  let is_valid_name = 'v:val != "run" && v:val !~ "^_"'
   let is_funcref = 'type(a:bm[v:val]) == type_func'
-  return filter(keys(a:bm), is_valid_name . ' && ' . is_funcref)
+  let is_bmfunc = 'v:val != "run" && v:val !~ "^_"'
+  return filter(keys(a:bm), is_funcref . ' && ' . is_bmfunc)
 endfunction
 
 function! s:is_sample(value)
