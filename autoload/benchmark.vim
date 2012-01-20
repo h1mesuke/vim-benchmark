@@ -1,10 +1,10 @@
 "=============================================================================
-" Simple Benchmarking Tool for Vim script
+" Benchmarking Tool for Vim script
 "
 " File    : autoload/benchmark.vim
-" Author  : h1mesuke <himesuke@gmail.com>
+" Author  : h1mesuke <himesuke+vim@gmail.com>
 " Updated : 2012-01-20
-" Version : 0.0.1
+" Version : 0.0.2
 " License : MIT license {{{
 "
 "   Permission is hereby granted, free of charge, to any person obtaining

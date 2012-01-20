@@ -1,8 +1,8 @@
-*benchmark.txt*		Simple Benchmarking Tool for Vim script
+*benchmark.txt*		Benchmarking Tool for Vim script
 
-Author  : h1mesuke <himesuke@gmail.com>
-Updated : 2012-01-15
-Version : 0.0.1
+Author  : h1mesuke <himesuke+vim@gmail.com>
+Updated : 2012-01-20
+Version : 0.0.2
 License : MIT license {{{
 
 	Permission is hereby granted, free of charge, to any person obtaining
@@ -128,6 +128,10 @@ ISSUES						*benchmark-issues*
 
 ==============================================================================
 CHANGELOG					*benchmark-changelog*
+
+0.0.2	2011-01-20
+
+	* Added sampling feature.
 
 0.0.1	2011-12-26
 
