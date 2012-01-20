@@ -3,12 +3,12 @@
 let s:bm = benchmark#new("String is empty?")
 
 let s:N = 10000
-let s:str = "hello"
+let s:STR = "hello"
 
 function! s:bm.empty()
   let i = 0
   while i < s:N
-    if empty(s:str)
+    if empty(s:STR)
     endif
     let i += 1
   endwhile
@@ -17,7 +17,7 @@ endfunction
 function! s:bm.op_equal()
   let i = 0
   while i < s:N
-    if s:str == ""
+    if s:STR == ""
     endif
     let i += 1
   endwhile
@@ -26,7 +26,7 @@ endfunction
 function! s:bm.op_match()
   let i = 0
   while i < s:N
-    if s:str =~ '^\s*$'
+    if s:STR =~ '^\s*$'
     endif
     let i += 1
   endwhile
