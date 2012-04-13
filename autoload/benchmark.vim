@@ -3,7 +3,7 @@
 "
 " File    : autoload/benchmark.vim
 " Author  : h1mesuke <himesuke+vim@gmail.com>
-" Updated : 2012-01-30
+" Updated : 2012-04-13
 " Version : 0.0.2
 " License : MIT license {{{
 "
@@ -62,7 +62,7 @@ function! s:benchmarker.run(...) abort
       catch
         let errors[func] = v:exception
       endtry
-      unlet retval
+      unlet! retval
     endfor
     call s:print_report(results, errors)
     let i += 1
