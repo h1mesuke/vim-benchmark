@@ -97,7 +97,7 @@ function! s:is_sample(value)
   return (type(a:value) != type(0) || a:value != 0)
 endfunction
 
-function s:compare_used(item1, item2)
+function! s:compare_used(item1, item2)
   let used1 = a:item1[1].used
   let used2 = a:item2[1].used
   return (used1 == used2 ? 0 : (used1 > used2 ? 1 : -1))
